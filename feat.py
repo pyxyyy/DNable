@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Api
 
 from backend_resources.hello_world_resource import HelloWorld
+from backend_resources.fitbit_message_resource import FitbitMessage
 from backend_resources.oauth_resource import OauthResource
 
 app = Flask(__name__)
@@ -16,6 +17,7 @@ def hello():
 
 api.add_resource(HelloWorld, '/')
 api.add_resource(OauthResource, '/oauth', )
+api.add_resource(FitbitMessage, '/fitbit_message')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
