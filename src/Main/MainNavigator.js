@@ -1,25 +1,13 @@
 import React from 'react'
 import {Dimensions} from 'react-native'
-import {StackNavigator, TabNavigator, DrawerNavigator} from 'react-navigation';
-import HomeScreen from '../Home/HomeScreen'
+import {StackNavigator, DrawerNavigator} from 'react-navigation';
 import SettingScreen from '../Setting/SettingScreen'
 import Drawer from './components/Drawer'
-
-const TabNav = TabNavigator(
-  {
-    Home: {screen: HomeScreen},
-    Profile: {screen: HomeScreen}
-  },
-  {
-    tabBarPosition: 'bottom',
-    swipeEnabled: false,
-    initialRouteName: 'Home'
-  }
-)
+import {HomeNavigator} from "../Home/HomeNavigator";
 
 const DrawerNav = DrawerNavigator(
   {
-    TabNav: {screen: TabNav},
+    HomeNav: {screen: HomeNavigator},
     Setting: {screen: SettingScreen}
   },
   {
