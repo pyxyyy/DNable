@@ -1,7 +1,9 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import Camera from 'react-native-camera';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './CameraStyle'
+import CrossButton from '../../Main/components/CrossButton'
 
 export default class CameraScreen extends React.Component {
   camera = null;
@@ -23,7 +25,12 @@ export default class CameraScreen extends React.Component {
             }}
             style={styles.preview}
             aspect={Camera.constants.Aspect.fill}>
-            <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+            <View style={styles.cross}>
+              <CrossButton onPress={() => this.props.navigation.goBack()} color="black" />
+            </View>
+            <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.goBack()}>
+              <Icon name="photo-camera" size={35} color="#10B472"/>
+            </TouchableOpacity>
           </Camera>
         </View>
       )
