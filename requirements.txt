@@ -1,0 +1,6 @@
+requests
+pillow
+pyzbar
+json
+pandas
+numpy
