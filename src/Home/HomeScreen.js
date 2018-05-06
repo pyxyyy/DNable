@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from './HomeStyle';
 import BarChart from '../Main/components/BarChart'
 
-@inject("homeState")
+@inject("homeState", "staticState")
 @observer
 export default class HomeScreen extends React.Component{
   constructor(props) {
@@ -17,9 +17,13 @@ export default class HomeScreen extends React.Component{
     return(
       <View style={styles.background}>
         <ScrollView style={styles.container} contentContainerStyle={styles.body}>
-          <View style={styles.header}>
-            <Text style={styles.text}>Hooray! Your blood sugar level has been consistently low recently. Keep up the good work!</Text>
-          </View>
+          <TouchableOpacity style={this.props.staticState.status == 0 ? styles.headerGreen : styles.headerAmber} onPress={() => this.props.staticState.change()}>
+            <Text style={styles.text}>{this.props.staticState.status == 0
+              ? 'Hooray! Your blood glucose level has been consistently in the safe zone. Keep up the good work!'
+              : this.props.staticState.low
+                ? "You seem a little short on blood glucose. Visit Recommendations to find a healthy glucose boost near you!"
+                : "Your blood glucose level is slightly elevated. Consider taking a 20 minutes walk in the park!"}</Text>
+          </TouchableOpacity>
           <View style={{width: '100%', marginTop: 20}}>
             <BarChart data={data} height={200} title="Your Blood Sugar Level"/>
           </View>

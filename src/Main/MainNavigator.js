@@ -5,11 +5,12 @@ import SettingScreen from '../Setting/SettingScreen'
 import Drawer from './components/Drawer/Drawer'
 import {HomeNavigator} from "../Home/HomeNavigator";
 import {CommunityNavigator} from "../Community/CommunityNavigator";
+import MapScreen from "../Recommendation/MapScreen";
 
 const DrawerNav = DrawerNavigator(
   {
     HomeNav: {screen: HomeNavigator},
-    Reccomendation: {screen: MapScreen },
+    Recommendation: {screen: MapScreen },
     Community: {screen: CommunityNavigator},
     Setting: {screen: SettingScreen}
   },

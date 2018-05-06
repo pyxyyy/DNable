@@ -19,11 +19,20 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
-  header: {
+  headerAmber: {
     width: '100%',
-    backgroundColor: '#57FF57',
+    backgroundColor: '#b48638',
     padding: 10,
-    opacity: 0.7,
+    paddingVertical: 20,
+    //opacity: 0.7,
+    borderRadius: 5
+  },
+  headerGreen: {
+    width: '100%',
+    backgroundColor: '#10B472',
+    padding: 10,
+    paddingVertical: 20,
+    //opacity: 0.7,
     borderRadius: 5
   },
 
