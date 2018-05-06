@@ -42,6 +42,7 @@ class FoodLog(Resource):
         # item and serving size is passed
         if arg_items is None:
             query = '{} of {}'.format(arg_serving_size, arg_item)
+            return {'item': arg_item, 'serving size': arg_serving_size}
             values_to_be_added = self._call_nutritionix_api(values_to_be_added, query, arg_item)
         else:
             for item in arg_items:
@@ -76,7 +77,7 @@ class FoodLog(Resource):
         # insert new row
         db.insert({'object': 'user_nutrition', 'nutrition_values': new_values})
 
-        return {}
+        return new_values
 
     def _call_fitbit_api(self, item, nutritional_values):
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -119,6 +120,9 @@ class FoodLog(Resource):
         body = {
             "query": query
         }
+        import logging
+
+        logging.debug("AHHHHH {}".format(query))
         response = requests.post(url=url, headers=headers, json=body)
         content = json.loads(response.content.decode('utf-8')).get('foods')
 
@@ -132,7 +136,7 @@ class FoodLog(Resource):
                 iron_value = nutrient.get('value')
             # ALCOHOL
             if nutrient.get('attr_id') == 221:
-                iron_value = nutrient.get('value')
+                alcohol_valuie = nutrient.get('value')
 
         self._call_fitbit_api(item, {
             'calories': content[0].get('nf_calories'),

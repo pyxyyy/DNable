@@ -151,12 +151,12 @@ def barcode_lookup():
     print(json.dumps(content, indent=4))
 
 
-# def decode_barcode():
-#     """
-#     Decodes barcode using pyzbar library
-#     """
-#     decoded_barcode = decode(Image.open('sample-barcode.png'))
-#     return decoded_barcode[0][0]
+def decode_barcode():
+    """
+    Decodes barcode using pyzbar library
+    """
+    decoded_barcode = decode(Image.open('sample-barcode.png'))
+    return decoded_barcode[0][0]
 
 
 # quick_food_search()
