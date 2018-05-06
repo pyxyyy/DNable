@@ -4,6 +4,4 @@ pyzbar
 json
 pandas
 numpy
-
-
---allow-unrelated-histories
+collections
