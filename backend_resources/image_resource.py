@@ -7,6 +7,9 @@ import werkzeug
 
 class ImageProcessing(Resource):
     def post(self):
+
+        # short circuit
+        return self._short_circuit()
         parser = reqparse.RequestParser()
         parser.add_argument('image', location='files', type=werkzeug.FileStorage)
         args = parser.parse_args()
@@ -18,12 +21,15 @@ class ImageProcessing(Resource):
 
         return self._call_calorie_mama(data)
 
+    def _short_circuit(self):
+        return [{'Item': 'Sliced Turkey', 'Serving size': '100 g', 'Calories': 1000, 'Carbohydrate': 0.023399999999999997, 'Protein': 0.16329999999999997, 'Fat': 0.023700000000000002}, {'Item': 'Swiss Cheese', 'Serving size': '1 cup, diced', 'Calories': 1790, 'Carbohydrate': 0.034, 'Protein': 0.284, 'Fat': 0.051}, {'Item': 'Ravioli', 'Serving size': '9 pieces', 'Calories': 1785.714286, 'Carbohydrate': 0.2285714286, 'Protein': 0.07142857142999999, 'Fat': 0.06428571429}]
+
     def _call_calorie_mama(self, data):
         headers = {
             'Content-Type': 'image/jpeg',
         }
         r = requests.post(
-            url='https://api-2445582032290.production.gw.apicast.io/v1/foodrecognition?user_key=369ff477f2803577f25128cab6d4749c',
+            url='https://api-2445582032290.production.gw.apicast.io/v1/foodrecognition?user_key=91415063a5b1ab6f6332e5469936aa9d',
             headers=headers,
             data=data)
 

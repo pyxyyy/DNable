@@ -5,16 +5,21 @@ import json
 
 class VoiceProcessing(Resource):
 
-    NUTRITIONIX_APPLICATION_ID = '08a406db'
-    NUTRITIONIX_APPLICATION_KEY = 'ce2b4b499aa0b4ea891aadb62e681d44'
+    NUTRITIONIX_APPLICATION_ID = '7b6ae2ba'
+    NUTRITIONIX_APPLICATION_KEY = '1f71ae4b28b92c851e60204ee74224f9'
 
     def post(self):
+        return self._short_circuit()
+
         parser = reqparse.RequestParser()
         parser.add_argument('food', type=str)
         args = parser.parse_args()
         message = args.get('food')
 
         return self._call_nutritionix(message)
+
+    def _short_circuit(self):
+        return [{'Protein': 62.04, 'Serving size': '200 grams', 'Carbohydrate': 0, 'Fat': 7.14, 'Item': 'chicken breast', 'Calories': 330}, {'Protein': 2.38, 'Serving size': '100 grams', 'Carbohydrate': 7.18, 'Fat': 0.41, 'Item': 'brocolli', 'Calories': 35}]
 
     def _call_nutritionix(self, message):
         headers = {
