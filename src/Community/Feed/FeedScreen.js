@@ -23,10 +23,10 @@ export default class FeedScreen extends React.Component {
             <View style={styles.cardHeader}>
               <Image source={{uri: data.picture.medium}} style={styles.cardPicture}/>
               <Text style={styles.cardName}>{this.capitalizeFirstLetter(data.name.first) + " " + this.capitalizeFirstLetter(data.name.last)}</Text>
-              <Icon style={{position: 'absolute', top: 0, right: 0, flex: 1}} name={this.props.feedState.loves.get(data.id.value) ? "heart" : "heart-outlined"} size={30} color={this.props.feedState.loves.get(data.id.value) ? "red" : "black"} onPress={() => this.props.feedState.toggleLove(data.id.value)}/>
+              <Icon style={{position: 'absolute', top: 0, right: 0, flex: 1}} name={this.props.feedState.loves.get(index) ? "heart" : "heart-outlined"} size={30} color={this.props.feedState.loves.get(index) ? "red" : "black"} onPress={() => this.props.feedState.toggleLove(index)}/>
             </View>
             <View style={styles.cardFooter}>
-              <Text style={styles.text}>{this.props.feedState.posts.get(data.id.value)}</Text>
+              <Text style={styles.text}>{this.props.feedState.posts.get(index)}</Text>
             </View>
           </View>
         )
