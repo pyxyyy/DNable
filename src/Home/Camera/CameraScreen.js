@@ -16,6 +16,13 @@ export default class CameraScreen extends React.Component {
       .catch(err => console.error(err));
   }
 
+  onBarCodeRead(e) {
+    console.log(
+      "Barcode Found!",
+      "Type: " + e.type + "\nData: " + e.data
+    );
+  }
+
   render() {
     return(
         <View style={styles.container}>
@@ -23,13 +30,14 @@ export default class CameraScreen extends React.Component {
             ref={(cam) => {
               this.camera = cam;
             }}
+            onBarCodeRead={this.onBarCodeRead.bind(this)}
             style={styles.preview}
             aspect={Camera.constants.Aspect.fill}>
-            <View style={styles.cross}>
-              <CrossButton onPress={() => this.props.navigation.goBack()} color="black" />
+            <View style={styles.header}>
+              <CrossButton onPress={() => this.props.navigation.goBack()} />
             </View>
             <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.goBack()}>
-              <Icon name="photo-camera" size={35} color="#10B472"/>
+              <Icon name="photo-camera" size={35} color="white"/>
             </TouchableOpacity>
           </Camera>
         </View>

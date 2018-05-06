@@ -16,6 +16,11 @@ def hello():
            "<span style=\"color:00B0B9;\">fitbit</span> account.</h1>" \
            "<h2 align=\"center\">Please close this window to continue.</h2>"
 
+@app.route("/peixuan")
+def peixuan():
+    return "<div>What's up</div>"
+
+
 api.add_resource(HelloWorld, '/')
 api.add_resource(OauthResource, '/oauth', )
 api.add_resource(FitbitMessage, '/fitbit_message')

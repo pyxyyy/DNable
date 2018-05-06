@@ -2,7 +2,7 @@ import React from 'react'
 import {Dimensions} from 'react-native'
 import {StackNavigator, DrawerNavigator} from 'react-navigation';
 import SettingScreen from '../Setting/SettingScreen'
-import Drawer from './components/Drawer'
+import Drawer from './components/Drawer/Drawer'
 import {HomeNavigator} from "../Home/HomeNavigator";
 
 const DrawerNav = DrawerNavigator(
@@ -11,7 +11,7 @@ const DrawerNav = DrawerNavigator(
     Setting: {screen: SettingScreen}
   },
   {
-    drawerWidth: Dimensions.get('window').width*0.7,
+    drawerWidth: Dimensions.get('window').width*0.6,
     contentComponent: Drawer
   }
 )
