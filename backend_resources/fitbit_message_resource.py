@@ -17,7 +17,13 @@ class FitbitMessage(Resource):
         else:
             return {'message': results[0].get('message')}
 
-    def post(self, message):
+    def post(self):
+        # Retrieve parameter message
+        parser = reqparse.RequestParser()
+        parser.add_argument('message', type=str)
+        args = parser.parse_args()
+        message = args.get('message')
+
         dir_path = os.path.dirname(os.path.realpath(__file__))
         db_path = os.path.join(dir_path, 'db.json')
         db = TinyDB(db_path)
@@ -30,4 +36,3 @@ class FitbitMessage(Resource):
         db.insert({'object': 'fitbit_message', 'message': message})
 
         return {}
-
