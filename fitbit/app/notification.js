@@ -22,6 +22,17 @@ export function setupNotifications() {
     notify_message.text="";
     vibration.stop();
   }
+  var date_widget = document.getElementById("date");
+  date_widget.onclick=function(evt) {
+    notify_message.text="";
+    vibration.stop();
+  }
+  var time_widget = document.getElementById("time");
+  time_widget.onclick=function(evt) {
+    notify_message.text="";
+    vibration.stop();
+  }
+  
   
   // send a message to the companion app when the peer connection is established
   messaging.peerSocket.onopen = function() {
@@ -41,9 +52,8 @@ export function setupNotifications() {
       notification_message=message;
       var notify_message = document.getElementById("notification");
       notify_message.text = notification_message;
-      setTimeout(function() {
-        notify_message.state = "enabled";
-      }, 2000);
+      notify_message.state = "enabled";
+
       vibration.start("ring");
       display.poke();
     }
