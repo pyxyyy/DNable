@@ -76,8 +76,37 @@ class FoodLog(Resource):
         return {}
 
     def _call_fitbit_api(self):
-        pass
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        db_path = os.path.join(dir_path, 'db.json')
+        db = TinyDB(db_path)
 
+        UserID = Query()
+        user_id_results = db.search(UserID.object == 'user_id')
+        AccessToken = Query()
+        access_token_results = db.search(AccessToken.object == 'access_token')
+
+        user_id = user_id_results[0].get('user_id')
+        access_token = access_token_results[0].get('access_token')
+        headers = {'Authorization': 'Bearer {}'.format(access_token)}
+
+        url = 'https://api.fitbit.com/1/user/%s/foods/log.json' % user_id
+        food_entry = {
+            "foodName": "Laksa Mania",
+            "mealTypeId": 7,
+            "unitId": 304,
+            "unit": {"id": 304, "name": "serving", "plural": "servings"},
+            "amount": 1.25,
+            "date": "2018-04-29",
+            "calories": 370,
+            "carbs": 147,
+            "fat": 117.5,
+            "fiber": 115,
+            "protein": 115,
+            "sodium": 1325
+        }
+        response = requests.post(url, data=food_entry, headers=headers)
+        content = json.loads(response.content)
+        return content
 
     def _call_nutritionix_api(self, current_values, query):
         headers = {
