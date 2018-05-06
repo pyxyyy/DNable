@@ -35,10 +35,12 @@ messaging.peerSocket.onmessage = function(evt) {
       // add code to update the UI
     
       notification_message=message;
-      //this.notify_message = document.getElementById("notification");
-
-      //this.notify_message.text = message;
-      vibration.start("nudge-max");
+      var notify_message = document.getElementById("notification");
+      notify_message.text = notification_message;
+      setTimeout(function() {
+        notify_message.state = "enabled";
+      }, 2000);
+      vibration.start("ring");
 
   }
 
