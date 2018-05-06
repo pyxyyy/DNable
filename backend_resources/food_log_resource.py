@@ -42,7 +42,7 @@ class FoodLog(Resource):
         # item and serving size is passed
         if arg_items is None:
             query = '{} of {}'.format(arg_serving_size, arg_item)
-            return {'test': query}
+            return {'item': arg_item, 'serving size': arg_serving_size}
             values_to_be_added = self._call_nutritionix_api(values_to_be_added, query, arg_item)
         else:
             for item in arg_items:
@@ -77,7 +77,7 @@ class FoodLog(Resource):
         # insert new row
         db.insert({'object': 'user_nutrition', 'nutrition_values': new_values})
 
-        return {}
+        return new_values
 
     def _call_fitbit_api(self, item, nutritional_values):
         dir_path = os.path.dirname(os.path.realpath(__file__))
