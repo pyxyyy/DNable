@@ -1,0 +1,52 @@
+#background {
+  viewport-fill: black;
+}
+
+text {
+  text-length: 1000;
+  font-family: Colfax-Light;
+  fill: white;
+}
+
+#notification {
+  text-length: 32;
+  text-anchor: middle;
+  x: 50%;
+  y: 30%;
+  font-size: 30;
+}
+
+
+#time {
+  text-length: 32;
+  text-anchor: middle;
+  x: 50%;
+  y: 50%;
+  font-size: 80;
+}
+
+#date {
+  text-length: 32;
+  text-anchor: middle;
+  x: 50%;
+  y: 65%;
+  font-size: 30;
+}
+
+#heart {
+  text-length: 32;
+  text-anchor: middle;
+  x: 50%;
+  y: 80%;
+}
+
+#resting-heart {
+  text-anchor: middle;
+  x: 50%;
+  y: 80%;
+}
+
+#battery {
+  x: 0%;
+  y: 10%;
+}
