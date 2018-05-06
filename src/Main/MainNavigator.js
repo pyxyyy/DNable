@@ -4,12 +4,12 @@ import {StackNavigator, DrawerNavigator} from 'react-navigation';
 import SettingScreen from '../Setting/SettingScreen'
 import Drawer from './components/Drawer/Drawer'
 import {HomeNavigator} from "../Home/HomeNavigator";
-import CommunityScreen from "../Community/CommunityScreen";
+import {CommunityNavigator} from "../Community/CommunityNavigator";
 
 const DrawerNav = DrawerNavigator(
   {
     HomeNav: {screen: HomeNavigator},
-    Community: {screen: CommunityScreen},
+    Community: {screen: CommunityNavigator},
     Setting: {screen: SettingScreen}
   },
   {
