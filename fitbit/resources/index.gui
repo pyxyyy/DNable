@@ -6,8 +6,8 @@
          to="" />
     <set href="group/separator" attributeName="width" to="150" />
   </use>
-  <text id="time" />
-  <text id="date" />
+  <text id="time" pointer-events="visible"/>
+  <text id="date" pointer-events="visible"/>
   <text id="battery" />
   <rect id="calories" x="0%" y="0%" width="0%" height="2%" fill="fb-white" />
   <rect id="distance" x="0%" y="96%" width="0%" height="2%" fill="fb-white" />
