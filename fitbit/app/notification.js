@@ -6,10 +6,17 @@ import  * as messaging from "messaging";
 import { vibration } from "haptics";
 import document from "document";
 
+var notification_message="";
+
+export function get_notification_message() { return notification_message; }
+
+
 export function setupNotifications() {
   
-  console.log("intializing notification module");
+console.log("intializing notification module");
 
+  
+  
 // Listen for the onopen event
 messaging.peerSocket.onopen = function() {
   //ui.updateUI("loading");
@@ -26,14 +33,16 @@ messaging.peerSocket.onmessage = function(evt) {
       var message=evt.data['text'];
       console.log("notify the user that: " +message);
       // add code to update the UI
-      this.notify_message = document.getElementById("notification");
+    
+      notification_message=message;
+      //this.notify_message = document.getElementById("notification");
 
-      this.notify_message.text = message;
+      //this.notify_message.text = message;
       vibration.start("nudge-max");
 
   }
 
-  console.log("received message"+ evt.data);
+  console.log("device received message"+ evt.data);
 }
 
 // Listen for the onerror event
