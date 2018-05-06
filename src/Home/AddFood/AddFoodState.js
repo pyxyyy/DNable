@@ -1,4 +1,4 @@
-import {observable, action, ObservableMap} from 'mobx';
+import {observable, action} from 'mobx';
 
 export default class AddFoodState {
   @observable data;
@@ -21,7 +21,7 @@ export default class AddFoodState {
       body :body
     }).then((res) => {return res.json()}).then(data => {
       console.log(data);
-      this.data = data;
+      this.data = data[0];
       //this.fetchImages();
     });
   }

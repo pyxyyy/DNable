@@ -5,7 +5,7 @@ import styles from './AddFoodStyle';
 import Header from '../../Main/components/Header'
 import Icon from "react-native-vector-icons/Foundation";
 
-@inject('addFoodState')
+@inject('addFoodState', 'staticState')
 @observer
 export default class AddFoodScreen extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ export default class AddFoodScreen extends React.Component {
     if(speech != null) this.props.addFoodState.fetchDataFromSpeech(speech);
   }
 
-  fetchDataFromCamera = (res) => {
+  /*fetchDataFromCamera = (res) => {
     let body = new FormData();
     body.append('image', {uri: res.uri, name: "image.jpeg", fileName: res.name ,type: 'image/jpeg'});
 
@@ -70,7 +70,7 @@ export default class AddFoodScreen extends React.Component {
       });
     })
 
-  }
+  }*/
 
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
@@ -129,7 +129,7 @@ export default class AddFoodScreen extends React.Component {
                       <Text style={styles.text}>Protein:</Text>
                     </View>
                     <View style={styles.tableCellRight}>
-                      <Text style={styles.text}>{this.props.addFoodState.data['Protein'] = "g"}</Text>
+                      <Text style={styles.text}>{this.props.addFoodState.data['Protein'] + "g"}</Text>
                     </View>
                   </View>
 
@@ -142,7 +142,7 @@ export default class AddFoodScreen extends React.Component {
                     </View>
                   </View>
                 </View>
-              <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('')}>
+              <TouchableOpacity style={styles.button} onPress={() => this.props.staticState.postUserData(this.props.addFoodState.data)}>
                 <Icon name="check" size={28} color="white"/>
               </TouchableOpacity>
               </View>

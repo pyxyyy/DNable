@@ -11,13 +11,13 @@ export default class FeedState {
     this.posts = new ObservableMap();
 
     for(let i = 0; i < 20; i++) {
-      fetch('https://randomuser.me/api/').then(res => {return res.json()}).then(data => {
+      fetch('https://randomuser.me/api/').then(res => {return res.json()}, () => { console.log("feed fetch fail")}).then(data => {
         this.profiles.push(data.results[0]);
-        this.loves.set(data.results[0].id.value, false);
+        this.loves.set(i, false);
         fetch('https://talaikis.com/api/quotes/random/').then(res1 => {
           return res1.json()
         }).then(data1 => {
-          this.posts.set(data.results[0].id.value, data1.quote.slice(0, 150));
+          this.posts.set(i, data1.quote.slice(0, 120));
         });
       });
     }
