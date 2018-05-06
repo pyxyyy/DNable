@@ -1,11 +1,13 @@
 import pandas as pd
-#import sys, os
-#sys.path.insert(0, os.path.abspath('backend_resources'))
+import sys, os
+sys.path.insert(0, os.path.abspath('backend_resources'))
 
 from backend_resources.nutritionix import *
 
 def run():
-    df_nut=pd.read_table('nut_goals.txt').fillna(0)
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    path = os.path.join(dir_path, 'nut_goals.txt')
+    df_nut=pd.read_table(path).fillna(0)
     df_nut.head()
 
     #hard coded to simulate a certain user
@@ -25,8 +27,9 @@ def run():
         calorie_deficit = 0
 
     #lookup nutritional goals based on condition, age, sex
-    nut_goals=df_nut[(df_nut.condition==condition) & (df_nut.sex==sex) & (df_nut.Age_min<=age) & (df_nut.Age_max>=age)].T.to_dict().values()[0]
-    nut_goals['208']=nut_goals['208']-calorie_deficit
+    # nut_goals=df_nut[(df_nut.condition==condition) & (df_nut.sex==sex) & (df_nut.Age_min<=age) & (df_nut.Age_max>=age)].T.to_dict().values()[0]
+    nut_goals = {}
+    nut_goals['208']=130-calorie_deficit
 
     #set gene-specific nutritional goals
     nut_goals['221']=12   #alcohol
@@ -44,8 +47,8 @@ def run():
     #Add a donut
     j=0 #pick just the first one
     eaten=quick_food_search('donut',common=True,brand=False,self=True)
-    eaten.values()[0][j]['food_name']
-    food_nut=eaten.values()[0][j]['full_nutrients']
+    # eaten.values()[0][j]['food_name']
+    food_nut=eaten.get('common')[0].get('full_nutrients')
     #parse output into a dict
     food_nut_dict={}
     for i in range(0,len(food_nut)):
@@ -69,12 +72,12 @@ def run():
         msg = "As your DNA suggests a lower tolerance for lactose, consider non-dairy options"
     if nut_balance['307']<250: #sodium
         msg = "As your DNA suggests a higher hypertension risk, controlling your sodium intake will minimize that"
-    if nut_balance['269']<10:  #sugars
-        msg = "As your DNA suggests a higher risk of sugar-induced weight gain, controlling your sugar intake will minimize that"
-    if nut_balance['418']>10:  #Vit D
-        msg = "As your DNA may predispose you to lower Vit D levels, get some sun for 10 mins!"
-    if nut_balance['291']>10:  #fiber
-        msg = "For good diabetic control, subsitute sugary foods for complex carbs like whole grains"
+    # if nut_balance['269']<10:  #sugars
+    #     msg = "As your DNA suggests a higher risk of sugar-induced weight gain, controlling your sugar intake will minimize that"
+    # if nut_balance['418']>10:  #Vit D
+    #     msg = "As your DNA may predispose you to lower Vit D levels, get some sun for 10 mins!"
+    # if nut_balance['291']>10:  #fiber
+    #     msg = "For good diabetic control, subsitute sugary foods for complex carbs like whole grains"
 
 
 
@@ -90,5 +93,5 @@ def run():
     brand_id_list=[i['brand_id'] for i in r]
 
     #to search menu items in nearby restaurants from above
-    filtered_search('burger',food_threshold, brand_id_list=brand_id_list)
+    return filtered_search('burger',food_threshold, brand_id_list=brand_id_list)
 
