@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    height: 100,
     width: '100%',
     backgroundColor: '#57FF57',
     padding: 10,
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 20,
+    fontSize: 15,
     color: 'white',
     fontFamily: 'AvenirNext-Regular, sans-serif',
     textAlign: 'justify'
