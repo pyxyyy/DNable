@@ -105,7 +105,7 @@ class FoodLog(Resource):
             "sodium": 1325
         }
         response = requests.post(url, data=food_entry, headers=headers)
-        content = json.loads(response.content)
+        content = json.loads(response.content.decode('utf-8'))
         return content
 
     def _call_nutritionix_api(self, current_values, query):
