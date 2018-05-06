@@ -7,10 +7,11 @@ import { charger } from "power";
 import { goals } from "user-activity";
 import { today } from "user-activity";
 import { setupNotifications } from "notification";
+import { get_notification_message } from "notification";
 
 import * as util from "../common/utils";
 
-clock.granularity = "minutes";
+clock.granularity = "seconds";
 setupNotifications();
 
 
@@ -34,6 +35,7 @@ function updateClock() {
   updateHorizontalBar('calories');
   updateVerticalBar('elevationGain');
   updateVerticalBar('activeMinutes');
+  updateNotification();
   updateBattery();
 }
 
@@ -146,4 +148,18 @@ function updateBattery()
     elBattery.text = Math.floor(battery.chargeLevel) + '%';
     elBattery.style.display = "inline";
   }
+}
+
+var scroll=0;
+function updateNotification() {
+    var notify_message = document.getElementById("notification");
+    var message = get_notification_message();
+    if (message.length>32) {
+      console.log("message: update"+message);
+       notify_message.text = message.substring(scroll,scroll+32)
+       scroll+=2;
+       if (scroll>message.length) scroll=0;
+    } else {
+       notify_message.text = message;
+    }
 }
