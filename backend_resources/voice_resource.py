@@ -5,8 +5,8 @@ import json
 
 class VoiceProcessing(Resource):
 
-    APPLICATION_ID = '08a406db'
-    APPLICATION_KEY = 'ce2b4b499aa0b4ea891aadb62e681d44'
+    NUTRITIONIX_APPLICATION_ID = '08a406db'
+    NUTRITIONIX_APPLICATION_KEY = 'ce2b4b499aa0b4ea891aadb62e681d44'
 
     def post(self):
         parser = reqparse.RequestParser()
@@ -19,8 +19,8 @@ class VoiceProcessing(Resource):
     def _call_nutritionix(self, message):
         headers = {
             'Content-Type': 'application/json',
-            'x-app-id': self.APPLICATION_ID,
-            'x-app-key': self.APPLICATION_KEY
+            'x-app-id': self.NUTRITIONIX_APPLICATION_ID,
+            'x-app-key': self.NUTRITIONIX_APPLICATION_KEY
         }
         url = 'https://trackapi.nutritionix.com/v2/natural/nutrients'
         body = {
@@ -34,7 +34,11 @@ class VoiceProcessing(Resource):
         for item in content:
             results.append({
                 'Item': item.get('food_name'),
-                'Serving size': '{} {}'.format(item.get('serving_qty'), item.get('serving_unit'))
+                'Serving size': '{} {}'.format(item.get('serving_qty'), item.get('serving_unit')),
+                'Calories': item.get('nf_calories'),
+                'Carbohydrate': item.get('nf_total_carbohydrate'),
+                'Protein': item.get('nf_protein'),
+                'Fat': item.get('nf_total_fat')
             })
 
         return results

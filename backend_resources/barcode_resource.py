@@ -34,7 +34,11 @@ class Barcode(Resource):
         for item in content:
             results.append({
                 'Item': item.get('food_name'),
-                'Serving size': '{} {}'.format(item.get('serving_qty'), item.get('serving_unit'))
+                'Serving size': '{} {}'.format(item.get('serving_qty'), item.get('serving_unit')),
+                'Calories': item.get('nf_calories'),
+                'Carbohydrate': item.get('nf_total_carbohydrate'),
+                'Protein': item.get('nf_protein'),
+                'Fat': item.get('nf_total_fat')
             })
 
         return results
