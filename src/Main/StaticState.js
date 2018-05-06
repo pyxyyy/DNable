@@ -1,5 +1,6 @@
 import React from 'react';
 import {observable, action, ObservableMap} from 'mobx';
+import {ToastAndroid} from "react-native";
 
 export default class StaticState{
   @observable status;
@@ -46,6 +47,8 @@ export default class StaticState{
         "Content-Type": "application/json"
       } ,
       body: JSON.stringify({item: data['Item'], size: data['Serving size']})
-    }).then(res => {return res.json()}).then(data => console.log(data));
+    }).then(res => {return res.json()}).then(data => {
+      ToastAndroid.show('Food Added!', ToastAndroid.SHORT);
+    });
   }
 }

@@ -9,6 +9,10 @@ export default class AddFoodState {
     //this.images = [];
   }
 
+  @action clearData = () => {
+    this.data = null;
+  }
+
   @action fetchDataFromCamera = (res) => {
     let body = new FormData();
     body.append('image', {uri: res.uri, name: "image.jpeg", fileName: res.name ,type: 'image/jpeg'});

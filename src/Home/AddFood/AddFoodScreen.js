@@ -86,7 +86,6 @@ export default class AddFoodScreen extends React.Component {
   };
 
   render(){
-    console.log(this.props.addFoodState.data);
     return(
       <View style={styles.background}>
         <Header onBack={() => this.props.navigation.popToTop()} title="Add Food"/>
@@ -142,7 +141,11 @@ export default class AddFoodScreen extends React.Component {
                     </View>
                   </View>
                 </View>
-              <TouchableOpacity style={styles.button} onPress={() => this.props.staticState.postUserData(this.props.addFoodState.data)}>
+              <TouchableOpacity style={styles.button} onPress={() => {
+                this.props.staticState.postUserData(this.props.addFoodState.data);
+                this.props.navigation.popToTop();
+                this.props.addFoodState.clearData();
+              }}>
                 <Icon name="check" size={28} color="white"/>
               </TouchableOpacity>
               </View>
