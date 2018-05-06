@@ -101,7 +101,7 @@ class FoodLog(Resource):
             "calories": nutritional_values.get('calories'),
             "carbs": nutritional_values.get('carbohydrates'),
             "fat": nutritional_values.get('fats'),
-            "protein": nutritional_values.get('protein')
+            "protein": nutritional_values.get('proteins')
         }
         response = requests.post(url, data=food_entry, headers=headers)
         content = json.loads(response.content.decode('utf-8'))
@@ -135,7 +135,7 @@ class FoodLog(Resource):
         self._call_fitbit_api(item, {
             'calories': content[0].get('nf_calories'),
             'carbohydrates': content[0].get('nf_total_carbohydrate'),
-            'proteins': content[0].get('nf_total_protein'),
+            'proteins': content[0].get('nf_protein'),
             'fats': content[0].get('nf_total_fat')
         })
 
