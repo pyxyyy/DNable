@@ -119,6 +119,9 @@ class FoodLog(Resource):
         body = {
             "query": query
         }
+        import logging
+
+        logging.debug("AHHHHH {}".format(query))
         response = requests.post(url=url, headers=headers, json=body)
         content = json.loads(response.content.decode('utf-8')).get('foods')
 
@@ -132,7 +135,7 @@ class FoodLog(Resource):
                 iron_value = nutrient.get('value')
             # ALCOHOL
             if nutrient.get('attr_id') == 221:
-                iron_value = nutrient.get('value')
+                alcohol_valuie = nutrient.get('value')
 
         self._call_fitbit_api(item, {
             'calories': content[0].get('nf_calories'),
