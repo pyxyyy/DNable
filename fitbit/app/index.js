@@ -11,6 +11,8 @@ import { get_notification_message } from "notification";
 
 import * as util from "../common/utils";
 
+var MAX_CHAR_LEN=17;
+
 clock.granularity = "seconds";
 setupNotifications();
 
@@ -154,9 +156,9 @@ var scroll=0;
 function updateNotification() {
     var notify_message = document.getElementById("notification");
     var message = get_notification_message();
-    if (message.length>32) {
+    if (message.length>MAX_CHAR_LEN) {
       console.log("message: update"+message);
-       notify_message.text = message.substring(scroll,scroll+32)
+       notify_message.text = message.substring(scroll,scroll+MAX_CHAR_LEN)
        scroll+=2;
        if (scroll>message.length) scroll=0;
     } else {

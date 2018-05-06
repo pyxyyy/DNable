@@ -11,24 +11,41 @@ me.onwakeinterval = function(evt) {
 }*/
 
 var sent=false;
-
+var curr_message=null;
 var notification_promise=null;
-var notify_url_callback = function(response) {
-  console.log("fetched data from url" + response.json);
+/*var notify_url_callback = function(response) {
+  console.log("fetched data from url" + response.json());
   notification_promise=null;
-}
+//  clearInterval();
+}*/
 
 var failed_notify_url_callback = function(response) {
-  console.log("ffailed to get url" + response);
+  console.log("failed to get url" + response);
   notification_promise=null;
 }
 
 var poll_messages=function(evt) {
-   var notification_pull_url="http://ec2-13-57-254-109.us-west-1.compute.amazonaws.com/fitbit_message";
+   var notification_pull_url="https://test.hackhealth102436.tk/fitbit_message";
    if (notification_promise == null) {
      
-   console.log("polling for incoming notifications");
-     notification_promise = fetch(notification_pull_url).then(notify_url_callback,failed_notify_url_callback);
+      console.log("polling for incoming notifications");
+      notification_promise = fetch(notification_pull_url).then(function(response) {
+       //console.log("received https response");
+       return response.json();
+    },failed_notify_url_callback).then(function (json) {
+        //console.log("parse json response" + JSON.stringify(json));
+        var message=json['message'];
+
+        //console.log("message:" + message);
+        if (curr_message == null || curr_message != message) {
+          console.log("new message device:" + message);
+          curr_message=message;
+          sendMessage(message);
+        }
+        notification_promise=null;
+        return true;
+     }
+    )
    }
   
  /*  console.log(x);
@@ -46,7 +63,7 @@ console.log("companion index.js running")
 messaging.peerSocket.onopen = function() {
   // Ready to send or receive messages
   console.log("peer socket opened")
-  sendMessage("Diabetes Manager");
+  sendMessage("Diabetes Manager - This is an amazing app that helps you manage your disease!");
 }
 
 // Listen for the onmessage event
