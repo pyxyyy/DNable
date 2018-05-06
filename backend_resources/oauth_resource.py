@@ -3,6 +3,7 @@ from flask_restful import Resource, reqparse
 
 import json
 import requests
+from tinydb import TinyDB, Query
 from urllib.parse import urlencode
 import base64
 
@@ -35,6 +36,7 @@ class OauthResource(Resource):
         response_content = json.loads(response.content)
 
         # Store access and refresh tokens
+        db = TinyDB('/db.json')
 
 
         # redirect to account linked page
