@@ -11,10 +11,17 @@ export default class AddFoodScreen extends React.Component {
       data: null
     }
 
-    this.fetchData(this.props.navigation.getParam("res", ""));
+    let cameraData = this.props.navigation.getParam("res", null);
+    if(cameraData != null) this.fetchDataFromCamera(cameraData);
+
+    let barcode = this.props.navigation.getParam("barcode", null);
+    if(barcode != null) this.fetchDataFromBarcode(barcode);
+
+    let speech = this.props.navigation.getParam("speech", null);
+    if(speech != null) this.fetchDataFromSpeech(speech);
   }
 
-  fetchData = (res) => {
+  fetchDataFromCamera = (res) => {
     let body = new FormData();
     body.append('image', {uri: res.uri, name: "image.jpeg", fileName: res.name ,type: 'image/jpeg'});
 
@@ -25,6 +32,26 @@ export default class AddFoodScreen extends React.Component {
       } ,
       body :body
     }).then((res) => {return res.json()}).then(data => this.setState({data: data}));
+  }
+
+  fetchDataFromBarcode = (barcode) => {
+    fetch('http://test.hackhealth102436.tk/barcode', {
+      method: 'POST',
+      headers:{
+        "Content-Type": "application/json"
+      } ,
+      body: JSON.stringify({barcode: barcode})
+    }).then(res => {return res.json()}).then(data => this.setState({data: data}));
+  }
+
+  fetchDataFromSpeech = (speech) => {
+    fetch('https://test.hackhealth102436.tk/voice', {
+      method: 'POST',
+      headers:{
+        "Content-Type": "application/json"
+      } ,
+      body: JSON.stringify({food: speech[0]})
+    }).then(res => {return res.json()}).then(data => this.setState({data: data}));
   }
 
   componentDidMount() {

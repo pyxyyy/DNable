@@ -11,6 +11,10 @@ export default class CameraScreen extends React.Component {
   camera = null;
   constructor(props) {
     super(props);
+
+    this.state = {
+      barcodeRead: false
+    }
   }
 
   takePicture() {
@@ -32,11 +36,8 @@ export default class CameraScreen extends React.Component {
   }
 
   onBarCodeRead(e) {
-    console.log(
-      "Barcode Found!",
-      "Type: " + e.type + "\nData: " + e.data
-    );
-    this.props.navigation.navigate("AddFood");
+    this.props.navigation.navigate("AddFood", {barcode: e.data});
+    this.setState({ barcodeRead: true });
   }
 
   render() {
@@ -46,7 +47,7 @@ export default class CameraScreen extends React.Component {
             ref={(cam) => {
               this.camera = cam;
             }}
-            onBarCodeRead={this.onBarCodeRead.bind(this)}
+            onBarCodeRead={this.state.barcodeRead ? null : this.onBarCodeRead.bind(this)}
             captureTarget={Camera.constants.CaptureTarget.temp}
             //captureTarget={Camera.constants.CaptureTarget.memory}
             style={styles.preview}
