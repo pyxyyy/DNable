@@ -1,6 +1,7 @@
 # OSX
 #
 .DS_Store
+.idea/
 
 # Xcode
 #
@@ -157,3 +158,11 @@ featenv/
 
 # mypy
 .mypy_cache/
+
+
+img/
+*.jpeg
+*.jpg
+*.json
+
+

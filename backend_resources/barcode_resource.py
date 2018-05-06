@@ -5,16 +5,20 @@ import requests
 
 class Barcode(Resource):
 
-    APPLICATION_ID = '08a406db'
-    APPLICATION_KEY = 'ce2b4b499aa0b4ea891aadb62e681d44'
+    APPLICATION_ID = '7b6ae2ba'
+    APPLICATION_KEY = '1f71ae4b28b92c851e60204ee74224f9'
 
     def post(self):
+        return self._short_circuit()
         parser = reqparse.RequestParser()
         parser.add_argument('barcode', type=str)
         args = parser.parse_args()
         barcode = args.get('barcode')
 
         return self._call_nutritionix(barcode)
+
+    def _short_circuit(self):
+        return [{'Item': 'Beef Jerky, Chipotle Adobo', 'Serving size': '1 oz', 'Calories': 100, 'Carbohydrate': 8, 'Protein': 10, 'Fat': 3}]
 
     def _call_nutritionix(self, barcode):
         headers = {
