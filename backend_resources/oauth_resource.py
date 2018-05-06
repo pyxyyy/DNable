@@ -34,7 +34,7 @@ class OauthResource(Resource):
             'code': authorization_code
         }
         response = requests.post(url=self.FITBIT_OAUTH_URL, headers=header, data=urlencode(body))
-        response_content = json.loads(response.content)
+        response_content = json.loads(response.content).decode('utf-8')
 
         # Store access and refresh tokens
         dir_path = os.path.dirname(os.path.realpath(__file__))
