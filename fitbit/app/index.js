@@ -11,7 +11,7 @@ import { get_notification_message } from "notification";
 
 import * as util from "../common/utils";
 
-var MAX_CHAR_LEN=17;
+var MAX_CHAR_LEN=24;
 
 clock.granularity = "seconds";
 setupNotifications();
@@ -37,7 +37,7 @@ function updateClock() {
   updateHorizontalBar('calories');
   updateVerticalBar('elevationGain');
   updateVerticalBar('activeMinutes');
-  updateNotification();
+  //updateNotification();
   updateBattery();
 }
 
@@ -72,7 +72,7 @@ oHeartRate.onreading = function() {
     elHRRest.style.display = "inline";
   }
 }
-oHeartRate.start();
+//oHeartRate.start();
 
 function updateVerticalBar(sTodayStat)
 {
@@ -150,18 +150,4 @@ function updateBattery()
     elBattery.text = Math.floor(battery.chargeLevel) + '%';
     elBattery.style.display = "inline";
   }
-}
-
-var scroll=0;
-function updateNotification() {
-    var notify_message = document.getElementById("notification");
-    var message = get_notification_message();
-    if (message.length>MAX_CHAR_LEN) {
-      console.log("message: update"+message);
-       notify_message.text = message.substring(scroll,scroll+MAX_CHAR_LEN)
-       scroll+=2;
-       if (scroll>message.length) scroll=0;
-    } else {
-       notify_message.text = message;
-    }
 }

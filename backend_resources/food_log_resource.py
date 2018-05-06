@@ -3,6 +3,7 @@ import requests
 import json
 import os
 from tinydb import TinyDB, Query
+import datetime
 
 
 class FoodLog(Resource):
@@ -19,6 +20,8 @@ class FoodLog(Resource):
 
         parser = reqparse.RequestParser()
         parser.add_argument('Items', type=dict, action='append')
+        parser.add_argument('Item', type=str)
+        parser.add_argument('Serving size', type=str)
         args = parser.parse_args()
         arg_item = args.get('Item')
         arg_serving_size = args.get('Serving size')
@@ -39,11 +42,11 @@ class FoodLog(Resource):
         # item and serving size is passed
         if arg_items is None:
             query = '{} of {}'.format(arg_serving_size, arg_item)
-            values_to_be_added = self._call_nutritionix_api(values_to_be_added, query)
+            values_to_be_added = self._call_nutritionix_api(values_to_be_added, query, arg_item)
         else:
             for item in arg_items:
                 query = '{} of {}'.format(item.get('Serving size'), item.get('Item'))
-                values_to_be_added = self._call_nutritionix_api(values_to_be_added, query)
+                values_to_be_added = self._call_nutritionix_api(values_to_be_added, query, item.get('Item'))
 
         # fetch existing row
         existing_row = Query()
@@ -75,11 +78,38 @@ class FoodLog(Resource):
 
         return {}
 
-    def _call_fitbit_api(self):
-        pass
+    def _call_fitbit_api(self, item, nutritional_values):
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        db_path = os.path.join(dir_path, 'db.json')
+        db = TinyDB(db_path)
 
+        UserID = Query()
+        user_id_results = db.search(UserID.object == 'user_id')
+        AccessToken = Query()
+        access_token_results = db.search(AccessToken.object == 'access_token')
 
-    def _call_nutritionix_api(self, current_values, query):
+        user_id = user_id_results[0].get('user_id')
+        access_token = access_token_results[0].get('access_token')
+        headers = {'Authorization': 'Bearer {}'.format(access_token)}
+
+        url = 'https://api.fitbit.com/1/user/%s/foods/log.json' % user_id
+        food_entry = {
+            "foodName": item,
+            "mealTypeId": 7,
+            "unitId": 304,
+            "unit": {"id": 304, "name": "serving", "plural": "servings"},
+            "amount": 1,
+            "date": datetime.datetime.now().strftime('%Y-%m-%d'),
+            "calories": nutritional_values.get('calories'),
+            "carbs": nutritional_values.get('carbohydrates'),
+            "fat": nutritional_values.get('fats'),
+            "protein": nutritional_values.get('proteins')
+        }
+        response = requests.post(url, data=food_entry, headers=headers)
+        content = json.loads(response.content.decode('utf-8'))
+        return content
+
+    def _call_nutritionix_api(self, current_values, query, item):
         headers = {
             'Content-Type': 'application/json',
             'x-app-id': self.NUTRITIONIX_APPLICATION_ID,
@@ -103,6 +133,13 @@ class FoodLog(Resource):
             # ALCOHOL
             if nutrient.get('attr_id') == 221:
                 iron_value = nutrient.get('value')
+
+        self._call_fitbit_api(item, {
+            'calories': content[0].get('nf_calories'),
+            'carbohydrates': content[0].get('nf_total_carbohydrate'),
+            'proteins': content[0].get('nf_protein'),
+            'fats': content[0].get('nf_total_fat')
+        })
 
         return {
             'calories': current_values.get('calories', 0) + content[0].get('nf_calories'),

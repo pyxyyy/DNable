@@ -1,10 +1,13 @@
 <svg id="background">
-  <text id="notification"> </text>
-
+   <use id="notification" href="#marquee-text" font-size="32" y="20%-40" x="0" width="100%"
+     height="80" fill="white" mode="1" value="180">
+    <rect width="100%" height="100%" fill="black" opacity="0.2" />
+    <set href="group/text" attributeName="text-buffer"
+         to="" />
+    <set href="group/separator" attributeName="width" to="150" />
+  </use>
   <text id="time" />
   <text id="date" />
-  <text id="heart" />
-  <text id="resting-heart" />
   <text id="battery" />
   <rect id="calories" x="0%" y="0%" width="0%" height="2%" fill="fb-white" />
   <rect id="distance" x="0%" y="96%" width="0%" height="2%" fill="fb-white" />

@@ -44,9 +44,11 @@ class OauthResource(Resource):
         # remove previous access token
         existing_row = Query()
         db.remove(existing_row.object == 'access_token')
+        db.remove(existing_row.object == 'user_id')
 
         # insert new access token
         db.insert({'object': 'access_token', 'access_token': response_content.get('access_token')})
+        db.insert({'object': 'user_id', 'user_id': response_content.get('user_id')})
 
         # redirect to account linked page
         return redirect("http://ec2-13-57-254-109.us-west-1.compute.amazonaws.com/account_linked", code=302)

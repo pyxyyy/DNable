@@ -2,7 +2,7 @@ import pandas as pd
 #import sys, os
 #sys.path.insert(0, os.path.abspath('backend_resources'))
 
-from nutritionix import *
+from backend_resources.nutritionix import *
 df_nut=pd.read_table('nut_goals.txt').fillna(0)
 df_nut.head()
 
@@ -65,13 +65,13 @@ if nut_balance['262']<50:  #caffeine
     msg = "As your DNA suggests a lower tolerance for caffeine, consider decaffeinated options"
 if nut_balance['213']<2:   #lactose
     msg = "As your DNA suggests a lower tolerance for lactose, consider non-dairy options"
-if nut_balance['307']<250 #sodium
+if nut_balance['307']<250: #sodium
     msg = "As your DNA suggests a higher hypertension risk, controlling your sodium intake will minimize that"
-if nut_balance['269']<10  #sugars
+if nut_balance['269']<10:  #sugars
     msg = "As your DNA suggests a higher risk of sugar-induced weight gain, controlling your sugar intake will minimize that"
-if nut_balance['418']>10  #Vit D
+if nut_balance['418']>10:  #Vit D
     msg = "As your DNA may predispose you to lower Vit D levels, get some sun for 10 mins!"
-if nut_balance['291']>10  #fiber
+if nut_balance['291']>10:  #fiber
     msg = "For good diabetic control, subsitute sugary foods for complex carbs like whole grains"
 
 
