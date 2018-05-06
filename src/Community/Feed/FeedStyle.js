@@ -15,7 +15,40 @@ const style = StyleSheet.create({
     width: '100%',
     height: 150,
     backgroundColor: 'white',
-    marginBottom: 10
+    marginBottom: 10,
+    padding: 15,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
+
+  cardHeader: {
+    width: '100%',
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  cardPicture: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 10
+  },
+  cardName: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black'
+  },
+  cardFooter: {
+    width: '100%',
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    flexDirection: 'row'
+  },
+  text: {
+    fontSize: 15,
+    flex: 9
   }
 })
 
