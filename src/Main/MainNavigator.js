@@ -15,7 +15,7 @@ const DrawerNav = DrawerNavigator(
   {
     drawerWidth: Dimensions.get('window').width*0.6,
     contentComponent: Drawer,
-    initialRouteName: "Community"
+    //initialRouteName: "Community"
   }
 )
 
