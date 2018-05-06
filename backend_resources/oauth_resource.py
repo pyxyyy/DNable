@@ -41,7 +41,8 @@ class OauthResource(Resource):
         db_path = os.path.join(dir_path, 'db.json')
         db = TinyDB(db_path)
 
-        db.insert({'object': 'access_token', 'message': response_content.get('access_token')})
+        return response_content
+        db.insert({'object': 'access_token', 'access_token': response_content.get('access_token')})
 
         # redirect to account linked page
         return redirect("http://ec2-13-57-254-109.us-west-1.compute.amazonaws.com/account_linked", code=302)
