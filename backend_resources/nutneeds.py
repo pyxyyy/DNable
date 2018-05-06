@@ -2,7 +2,7 @@
 import pandas as pd
 from nutritionix import *
 
-df_nut=pd.read_table('/Users/A267512/Desktop/feat.txt').fillna(0)
+df_nut=pd.read_table('nut_goals.txt').fillna(0)
 df_nut.head()
 
 #hard coded to simulate a certain user
