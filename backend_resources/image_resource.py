@@ -29,24 +29,21 @@ class ImageProcessing(Resource):
 
         response_content = json.loads(r.content.decode('utf-8')).get('results')
 
-        # return top results
-        num_results = min(len(response_content), 3)
+        # parse results
         results = []
-
-        for i in range(num_results):
-            num_inner_results = min(len(response_content[i].get('items')), 3-i)
-            for j in range(num_inner_results):
-                serving_sizes = response_content[i].get('items')[j].get('servingSizes')
+        for item in response_content:
+            for inner_items in item.get('items'):
+                serving_sizes = inner_items.get('servingSizes')
                 if len(serving_sizes) > 1:
-                    sorted_serving_sizes = sorted(serving_sizes, key=lambda k: k['servingWeight'], reverse=True)
+                    sorted_serving_sizes = sorted(serving_sizes, key=lambda k: k.get('servingWeight', 0), reverse=True)
                     serving_size = sorted_serving_sizes[0]
                 else:
                     serving_size = serving_sizes[0]
                 results.append({
-                    'Item Type': response_content[i].get('items')[j].get('group'),
-                    'Item': response_content[i].get('items')[j].get('name'),
+                    'Item Type': inner_items.get('group'),
+                    'Item': inner_items.get('name'),
                     'Serving size': serving_size.get('unit'),
-                    'Score': response_content[i].get('items')[j].get('score'),
+                    'Score': inner_items.get('score'),
                 })
 
         sorted_results = sorted(results, key=lambda k: k['Score'], reverse=True)
