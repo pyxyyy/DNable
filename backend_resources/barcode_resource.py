@@ -27,7 +27,7 @@ class Barcode(Resource):
             'upc': barcode
         }
         response = requests.get(url=url, headers=headers, params=params)
-        content = json.loads(response.content).get('foods')
+        content = json.loads(response.content.decode('utf-8')).get('foods')
 
         results = []
 
