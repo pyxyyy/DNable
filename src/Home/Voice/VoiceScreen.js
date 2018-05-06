@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, Text, TouchableOpacity, ActivityIndicator, ToastAndroid } from 'react-native'
 import Voice from 'react-native-voice';
 import styles from './VoiceStyle'
 import CrossButton from "../../Main/components/CrossButton";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Animatable from 'react-native-animatable';
+//import * as ToastAndroid from "react-native";
 
 export default class VoiceScreen extends React.Component{
   constructor(props) {
@@ -15,21 +16,33 @@ export default class VoiceScreen extends React.Component{
     }
     //Voice.onSpeechEnd = this.onSpeechEndHandler.bind(this);
     Voice.onSpeechResults = this.onSpeechResultsHandler.bind(this);
+    Voice.onSpeechError = this.onSpeechError.bind(this);
+  }
+
+  onSpeechError = (e) => {
+    switch(e.error.message) {
+      case "6/No speech input":
+      case "5/Client side error":
+        ToastAndroid.show('No speech detected!', ToastAndroid.SHORT);
+        this.props.navigation.goBack();
+    }
   }
 
   onSpeechResultsHandler = (e) => {
-    //this.props.homeState.setName(e.value[0]);
+    this.setState({ stop: true });
+    // Send e.value to backend with a Promise. On resolve, navigate
+    this.props.navigation.navigate("AddFood");
   }
 
-  /*componentDidMount = () => {
-    //Voice.start();
-  }*/
+  componentDidMount = () => {
+    Voice.start();
+  }
 
   render(){
     return(
       <View style={styles.background}>
         <View style={styles.header}>
-          <CrossButton onPress={() => this.props.navigation.goBack()} />
+          <CrossButton onPress={() => { Voice.cancel(); this.props.navigation.goBack(); }} />
         </View>
         <View style={styles.container} >
           <Animatable.View animation="pulse" iterationCount="infinite">
