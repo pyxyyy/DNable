@@ -27,7 +27,7 @@ class ImageProcessing(Resource):
             headers=headers,
             data=data)
 
-        response_content = json.loads(r.content).get('results')
+        response_content = json.loads(r.content.decode('utf-8')).get('results')
 
         # return top results
         num_results = min(len(response_content), 3)
