@@ -73,7 +73,7 @@ class FoodLog(Resource):
         # insert new row
         db.insert({'object': 'user_nutrition', 'nutrition_values': new_values})
 
-        return {}
+        return self._call_fitbit_api()
 
     def _call_fitbit_api(self):
         dir_path = os.path.dirname(os.path.realpath(__file__))
