@@ -9,7 +9,6 @@ class ImageProcessing(Resource):
     def post(self):
 
         # short circuit
-        return self._short_circuit()
         parser = reqparse.RequestParser()
         parser.add_argument('image', location='files', type=werkzeug.FileStorage)
         args = parser.parse_args()
