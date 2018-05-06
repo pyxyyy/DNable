@@ -44,10 +44,10 @@ class ImageProcessing(Resource):
                     'Item': inner_items.get('name'),
                     'Serving size': serving_size.get('unit'),
                     'Score': inner_items.get('score'),
-                    'Calories': inner_items.get('calories'),
-                    'Carbohydrate': inner_items.get('totalCarbs'),
-                    'Protein': inner_items.get('protein'),
-                    'Fat': inner_items.get('totalFat')
+                    'Calories': inner_items.get('nutrition').get('calories'),
+                    'Carbohydrate': inner_items.get('nutrition').get('totalCarbs'),
+                    'Protein': inner_items.get('nutrition').get('protein'),
+                    'Fat': inner_items.get('nutrition').get('totalFat')
                 })
 
         sorted_results = sorted(results, key=lambda k: k['Score'], reverse=True)
