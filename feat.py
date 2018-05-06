@@ -7,6 +7,7 @@ from backend_resources.oauth_resource import OauthResource
 from backend_resources.edamam_resource import Edamam
 from backend_resources.image_resource import ImageProcessing
 from backend_resources.voice_resource import VoiceProcessing
+from backend_resources.barcode_resource import Barcode
 
 app = Flask(__name__)
 api = Api(app)
@@ -30,6 +31,7 @@ api.add_resource(FitbitMessage, '/fitbit_message')
 api.add_resource(ImageProcessing, '/image')
 api.add_resource(VoiceProcessing, '/voice')
 api.add_resource(Edamam, '/edamam')
+api.add_resource(Barcode, '/barcode')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
