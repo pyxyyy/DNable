@@ -11,11 +11,11 @@ import { get_notification_message } from "notification";
 
 import * as util from "../common/utils";
 
-var MAX_CHAR_LEN=24;
+// set up how often the clockface updates
+clock.granularity = "minutes";
 
-clock.granularity = "seconds";
+// initialize server backend notifications
 setupNotifications();
-
 
 let elTime = document.getElementById("time");
 let elDate = document.getElementById("date");
@@ -37,10 +37,8 @@ function updateClock() {
   updateHorizontalBar('calories');
   updateVerticalBar('elevationGain');
   updateVerticalBar('activeMinutes');
-  //updateNotification();
   updateBattery();
 }
-
 
 
 clock.ontick = () => updateClock();
@@ -72,6 +70,7 @@ oHeartRate.onreading = function() {
     elHRRest.style.display = "inline";
   }
 }
+// disable heartrate monitor
 //oHeartRate.start();
 
 function updateVerticalBar(sTodayStat)
