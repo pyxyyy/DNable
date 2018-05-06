@@ -1,0 +1,26 @@
+{
+  "fitbit": {
+    "appUUID": "79592a6b-5b9c-49e2-91e2-0de9752591b1",
+    "appType": "clockface",
+    "appDisplayName": "j-snow-clockface",
+    "iconFile": "resources/icon.png",
+    "wipeColor": "",
+    "requestedPermissions": [
+      "access_activity",
+      "access_user_profile",
+      "access_heart_rate",
+      "access_location",
+      "access_internet",
+      "run_background"
+    ],
+    "buildTargets": [
+      "higgs",
+      "meson"
+    ],
+    "i18n": {
+      "en": {
+        "name": "j-snow-clockface"
+      }
+    }
+  }
+}
