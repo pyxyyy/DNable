@@ -42,6 +42,7 @@ class FoodLog(Resource):
         # item and serving size is passed
         if arg_items is None:
             query = '{} of {}'.format(arg_serving_size, arg_item)
+            return {'test': query}
             values_to_be_added = self._call_nutritionix_api(values_to_be_added, query, arg_item)
         else:
             for item in arg_items:
