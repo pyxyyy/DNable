@@ -9,8 +9,6 @@ class VoiceProcessing(Resource):
     NUTRITIONIX_APPLICATION_KEY = '1f71ae4b28b92c851e60204ee74224f9'
 
     def post(self):
-        return self._short_circuit()
-
         parser = reqparse.RequestParser()
         parser.add_argument('food', type=str)
         args = parser.parse_args()

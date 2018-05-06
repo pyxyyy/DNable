@@ -24,6 +24,7 @@ var failed_notify_url_callback = function(response) {
   notification_promise=null;
 }
 
+// call back used to poll for messages from a server REST endpoint
 var poll_messages=function(evt) {
    var notification_pull_url="https://test.hackhealth102436.tk/fitbit_message";
    if (notification_promise == null) {
@@ -37,7 +38,7 @@ var poll_messages=function(evt) {
         var message=json['message'];
 
         //console.log("message:" + message);
-        if (curr_message == null || curr_message != message) {
+        if (message!="" && (curr_message == null || curr_message != message)) {
           console.log("new message device:" + message);
           curr_message=message;
           sendMessage(message);
@@ -47,12 +48,6 @@ var poll_messages=function(evt) {
      }
     )
    }
-  
- /*  console.log(x);
-   if (!sent) {
-      sendMessage("text message");
-      sent=true;
-   }*/
 }
 
 //
@@ -62,8 +57,8 @@ console.log("companion index.js running")
 // Listen for the onopen event
 messaging.peerSocket.onopen = function() {
   // Ready to send or receive messages
-  console.log("peer socket opened")
-  sendMessage("Diabetes Manager - This is an amazing app that helps you manage your disease!");
+  //console.log("peer socket opened")
+  sendMessage("Welcome to DNable!");
 }
 
 // Listen for the onmessage event
@@ -74,11 +69,11 @@ messaging.peerSocket.onmessage = function(evt) {
 
 function sendMessage(text) {
     console.log("peer socket send message")
-
     if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
       // Limit results to the number of tiles available in firmware
       //departures.splice(TRAIN_COUNT, departures.length);
       messaging.peerSocket.send({'type':'notify','text':text});
     }
 }
+
 

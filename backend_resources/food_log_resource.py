@@ -19,13 +19,13 @@ class FoodLog(Resource):
         db = TinyDB(db_path)
 
         parser = reqparse.RequestParser()
-        parser.add_argument('Items', type=dict, action='append')
-        parser.add_argument('Item', type=str)
-        parser.add_argument('Serving size', type=str)
+        # parser.add_argument('Items', type=dict, action='append')
+        parser.add_argument('item', type=str)
+        parser.add_argument('size', type=str)
         args = parser.parse_args()
-        arg_item = args.get('Item')
-        arg_serving_size = args.get('Serving size')
-        arg_items = args.get('Items')
+        arg_item = args.get('item')
+        arg_serving_size = args.get('size')
+        # arg_items = args.get('Items')
 
         # Get values from nutrition IX
         values_to_be_added = {
@@ -40,14 +40,15 @@ class FoodLog(Resource):
         }
 
         # item and serving size is passed
-        if arg_items is None:
+        # if arg_items is None:
+        if True:
             query = '{} of {}'.format(arg_serving_size, arg_item)
-            return {'item': arg_item, 'serving size': arg_serving_size}
             values_to_be_added = self._call_nutritionix_api(values_to_be_added, query, arg_item)
         else:
-            for item in arg_items:
-                query = '{} of {}'.format(item.get('Serving size'), item.get('Item'))
-                values_to_be_added = self._call_nutritionix_api(values_to_be_added, query, item.get('Item'))
+            # for item in arg_items:
+            #     query = '{} of {}'.format(item.get('Serving size'), item.get('Item'))
+            #     values_to_be_added = self._call_nutritionix_api(values_to_be_added, query, item.get('Item'))
+            pass
 
         # fetch existing row
         existing_row = Query()

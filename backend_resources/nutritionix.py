@@ -101,7 +101,7 @@ def filtered_search(food, thresholdStr, brand_id_list=None):
     content = json.loads(response.content)
 
     print(json.dumps(content, indent=4))
-    return content.values()
+    return content
 
 
 def restaurant_lookup(geoll,radius='1km', max='20', measure='point_distance'):
