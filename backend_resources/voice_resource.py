@@ -27,6 +27,14 @@ class VoiceProcessing(Resource):
             "query": message
         }
         response = requests.post(url=url, headers=headers, json=body)
-        content = json.loads(response.content)
+        content = json.loads(response.content.decode('utf-8')).get('foods')
 
-        return content
+        results = []
+
+        for item in content:
+            results.append({
+                'Item': item.get('food_name'),
+                'Serving size': '{} {}'.format(item.get('serving_qty'), item.get('serving_unit'))
+            })
+
+        return results
