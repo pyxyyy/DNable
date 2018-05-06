@@ -31,7 +31,7 @@ export default class VoiceScreen extends React.Component{
   onSpeechResultsHandler = (e) => {
     this.setState({ stop: true });
     // Send e.value to backend with a Promise. On resolve, navigate
-    this.props.navigation.navigate("AddFood");
+    this.props.navigation.navigate("AddFood", {speech: e.value});
   }
 
   componentDidMount = () => {

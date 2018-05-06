@@ -5,7 +5,17 @@ const style = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: '#222222',
-    alignItems: 'center'
+  },
+  content: {
+    width: '100%',
+    alignItems: 'center',
+    padding: 10
+  },
+  cardContainer: {
+    width: '100%',
+    height: 150,
+    backgroundColor: 'white',
+    marginBottom: 10
   }
 })
 
