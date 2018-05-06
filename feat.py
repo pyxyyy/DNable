@@ -3,7 +3,6 @@ from flask_restful import Api
 
 from backend_resources.hello_world_resource import HelloWorld
 from backend_resources.fitbit_message_resource import FitbitMessage
-from backend_resources.fitbit_message_resource2 import FitbitMessage2
 from backend_resources.oauth_resource import OauthResource
 from backend_resources.edamam_resource import Edamam
 
@@ -25,7 +24,6 @@ def peixuan():
 api.add_resource(HelloWorld, '/')
 api.add_resource(OauthResource, '/oauth', )
 api.add_resource(FitbitMessage, '/fitbit_message')
-api.add_resource(FitbitMessage2, '/fitbit_message/<message>')
 api.add_resource(Edamam, '/edamam')
 
 if __name__ == '__main__':
