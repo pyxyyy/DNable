@@ -20,6 +20,8 @@ class FoodLog(Resource):
 
         parser = reqparse.RequestParser()
         parser.add_argument('Items', type=dict, action='append')
+        parser.add_argument('Item', type=str)
+        parser.add_argument('Serving size', type=str)
         args = parser.parse_args()
         arg_item = args.get('Item')
         arg_serving_size = args.get('Serving size')
