@@ -10,9 +10,9 @@ export default class StaticState{
     console.log(JSON.stringify(data));
     let body = [];
     body.push(JSON.stringify(data));
-    fetch('http://test.hackhealth102436.tk:5000/foodlog', {
+    fetch('http://test.hackhealth102436.tk/foodlog', {
       method: 'PUT',
       body: JSON.stringify(data)
-    }).then(res => console.log(res.json()));
+    }).then(res => {return res.json()}).then(data => console.log(data));
   }
 }

@@ -9,6 +9,7 @@ import {CommunityNavigator} from "../Community/CommunityNavigator";
 const DrawerNav = DrawerNavigator(
   {
     HomeNav: {screen: HomeNavigator},
+    Reccomendation: {screen: MapScreen },
     Community: {screen: CommunityNavigator},
     Setting: {screen: SettingScreen}
   },
