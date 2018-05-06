@@ -16,18 +16,16 @@ const styles = StyleSheet.create({
     height: 70,
     width: 70,
     borderRadius: 35,
-    backgroundColor: 'white',
+    backgroundColor: '#10B472',
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 3,
-    borderColor: '#59D9A6',
-    marginBottom: 10
+    marginBottom: 20
   },
 
-  cross: {
-    justifyContent: 'flex-end',
+  header: {
+    alignItems: 'flex-end',
     width: '100%',
-    padding: 10
+    padding: 20
   }
 })
 

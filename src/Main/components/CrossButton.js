@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 
 /**
@@ -9,9 +9,20 @@ import Icon from 'react-native-vector-icons/Entypo';
 export default class CrossButton extends React.Component {
   render() {
     return(
-        <TouchableOpacity>
-          <Icon name="cross" size={40} color={this.props.color} onPress={this.props.onPress} />
+        <TouchableOpacity style={styles.container}>
+          <Icon name="cross" size={30} color="white" onPress={this.props.onPress} />
         </TouchableOpacity>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#10B472',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})
