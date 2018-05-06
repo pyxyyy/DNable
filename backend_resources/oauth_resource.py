@@ -41,6 +41,11 @@ class OauthResource(Resource):
         db_path = os.path.join(dir_path, 'db.json')
         db = TinyDB(db_path)
 
+        # remove previous access token
+        existing_row = Query()
+        db.remove(existing_row.object == 'access_token')
+
+        # insert new access token
         db.insert({'object': 'access_token', 'access_token': response_content.get('access_token')})
 
         # redirect to account linked page
