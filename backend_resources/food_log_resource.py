@@ -44,7 +44,7 @@ class FoodLog(Resource):
         else:
             for item in arg_items:
                 query = '{} of {}'.format(item.get('Serving size'), item.get('Item'))
-                values_to_be_added = self._call_nutritionix_api(values_to_be_added, query. itme.get('Item'))
+                values_to_be_added = self._call_nutritionix_api(values_to_be_added, query, item.get('Item'))
 
         # fetch existing row
         existing_row = Query()
