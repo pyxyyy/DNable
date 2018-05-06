@@ -16,14 +16,12 @@ export default class CameraScreen extends React.Component {
   takePicture() {
     this.camera.capture({})
       .then((path) => {
-        console.log(path.path);
         ImageResizer.createResizedImage(path.path, 544, 544, 'JPEG', 100, 0, null).then((response) => {
           // response.uri is the URI of the new image that can now be displayed, uploaded...
-          console.log(response.uri);
           // response.path is the path of the new image
           // response.name is the name of the new image with the extension
           // response.size is the size of the new image
-          this.props.navigation.navigate("AddFood", {uri: response.uri});
+          this.props.navigation.navigate("AddFood", {res: response});
         }).catch((err) => {
           // Oops, something went wrong. Check that the filename is correct and
           // inspect err to get more details.
@@ -50,6 +48,7 @@ export default class CameraScreen extends React.Component {
             }}
             onBarCodeRead={this.onBarCodeRead.bind(this)}
             captureTarget={Camera.constants.CaptureTarget.temp}
+            //captureTarget={Camera.constants.CaptureTarget.memory}
             style={styles.preview}
             aspect={Camera.constants.Aspect.fill}>
             <View style={styles.header}>

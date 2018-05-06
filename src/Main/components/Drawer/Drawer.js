@@ -15,6 +15,9 @@ export default class Drawer extends React.Component{
         <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Setting')}>
           <Text style={styles.text}>Progress</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Community')}>
+          <Text style={styles.text}>Community</Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Setting')}>
           <Text style={styles.text}>Settings</Text>
         </TouchableOpacity>
